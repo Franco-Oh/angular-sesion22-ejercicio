@@ -1,1 +1,24 @@
-<p>login works!</p>
+<div class="container mx-auto my-8 text-center">
+    <form [formGroup]="formLogin">
+        <h1>Login</h1>
+        <p *ngIf="msgCorreoInvalido"> El correo y/o la contraseña no son validos</p>
+        <div class="">
+            <label for="email">Email: </label>
+            <input type="email" name="email" id="email" placeholder="Ingresar email" formControlName="email" class="px-3 py-1.5 text-base font-normal text-gray-700 bg-transparent bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:border-blue-500 focus:outline-none">
+            <span appValidacion *ngIf="this.formLogin.get('email')?.invalid">
+                <span *ngIf="this.formLogin.get('email')?.dirty" class="text-danger"> (Debe ser un correo válido)</span>
+            </span><br>
+        </div>
+        <div>
+            <label for="password">Contraseña: </label>
+            <input type="password" name="password" id="password" placeholder="Ingresar contraseña" formControlName="password">
+            <span appValidacion *ngIf="this.formLogin.get('password')?.invalid">
+                <span *ngIf="this.formLogin.get('password')?.dirty" class="text-danger">(Debe tener mínimo 6 caracteres numericos)</span>
+            </span><br>
+        </div>
+        <div>
+            <button [disabled]="formLogin.invalid" (click)="onSubmit()">Login</button>
+        </div>
+    </form>
+    <p>Si aún no estas registrado, puedes hacerlo <a [routerLink]="['/register']">aquí</a></p>
+</div>
